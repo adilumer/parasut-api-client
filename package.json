@@ -1,0 +1,37 @@
+{
+  "name": "parasut-api-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/parasutClient.js",
+  "types": "dist/parasutClient.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/parasutClient.js",
+      "require": "./dist/parasutClient.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.8",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "axios": "^1.10.0"
+  }
+}
