@@ -1,6 +1,6 @@
 # Parasut API Client
 
-A secure, efficient, and fully-typed Node.js/TypeScript client for the [Parasut API](https://apidocs.parasut.com/#), using axios for HTTP requests. 
+A secure, efficient, and fully-typed Node.js/TypeScript client for the [Parasut API](https://apidocs.parasut.com/#), using axios for HTTP requests.
 
 ## Features
 
@@ -12,11 +12,7 @@ A secure, efficient, and fully-typed Node.js/TypeScript client for the [Parasut 
 
 ## Installation
 
-Install from npm:
-
-```bash
-npm install parasut-api-client
-```
+Install from npm: ```bash npm install parasut-api-client```
 
 ---
 
@@ -281,44 +277,8 @@ export interface ErrorResponse {
 
 ---
 
-## Security & Best Practices
-
-- All credentials are validated before use.
-- All HTTP errors are caught and reported with clear messages.
-- Access tokens are never exposed or logged.
-- All types are strictly defined for maximum safety.
-
----
-
-## Publishing
-
-To publish this package to npm:
-
-1. Update the version in `package.json` as needed.
-2. Run the build:
-   ```bash
-   npm run build
-   ```
-3. Log in to npm (if not already):
-   ```bash
-   npm login
-   ```
-4. Publish:
-   ```bash
-   npm publish
-   ```
-
----
-
-## Next Steps
-
-- Implement endpoint methods for all Parasut resources (companies, contacts, invoices, etc.)
-- Add pagination, filtering, and relationship support as per the [Parasut API docs](https://apidocs.parasut.com/#).
-
----
-
 ## References
 
 - [Parasut API Documentation](https://apidocs.parasut.com/#)
 - [OAuth2 Password Grant](https://apidocs.parasut.com/#/authentication)
-- [JSON:API Spec](https://jsonapi.org/format/) 
+- [JSON:API Spec](https://jsonapi.org/format/)
