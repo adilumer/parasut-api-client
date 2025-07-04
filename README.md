@@ -1,12 +1,14 @@
 # Parasut API Client
 
-A secure, efficient, and fully-typed Node.js/TypeScript client for the [Parasut API](https://apidocs.parasut.com/#), using axios for HTTP requests.
+This is a Node.js client for Paraşüt, a cloud-based accounting and invoicing platform designed for small businesses in Turkey. Paraşüt provides tools for managing invoices, expenses, stock, and financial reporting.
 
-## Features
+This Node.js/TypeScript library offers a simple interface to interact with the Paraşüt API v4, enabling seamless integration for automating financial operations.
 
-- OAuth2 authentication (password grant)
-- Token caching and refresh
-- TypeScript interfaces for all major Parasut objects
+The project was originally intended to be completely dependency-free. However, I later added Axios to simplify HTTP request handling, as most projects integrating with external APIs already include an HTTP client—and Axios is one of the most widely adopted and reliable options available.
+
+The API client is modular by design. Functionality is organized into domain-specific modules (e.g., SalesOffers, Taxes, Contacts), allowing intuitive access to endpoints. For example, you can fetch an invoice with apiClient.sales.getInvoice(...). This structure keeps the client organized, scalable, and easy to use.
+
+Reference: [Parasut API](https://apidocs.parasut.com/#)
 
 ---
 
@@ -38,6 +40,31 @@ const client = new ParasutClient({
   password: 'YOUR_PASSWORD',
   // baseUrl: 'https://api.parasut.com/v4' // optional, defaults to v4
 });
+```
+
+## Modulation
+
+The API client is modular by design. Functionality is organized into domain-specific modules, allowing intuitive access to endpoints:
+
+- `client.companies` - Company management
+- `client.contacts` - Contact (customer/vendor) management
+- `client.salesOffer` - Sales offers
+- `client.salesInvoice` - Sales invoices
+- `client.apiHome` - API home and general endpoints
+
+Example usage:
+```typescript
+// Get all contacts
+const contacts = await client.contacts.getContacts();
+
+// Create a new contact
+const newContact = await client.contacts.createContact({
+  name: 'John Doe',
+  email: 'john@example.com'
+});
+
+// Get a specific contact
+const contact = await client.contacts.getContact('123');
 ```
 
 ## Authentication

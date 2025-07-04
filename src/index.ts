@@ -1,2 +1,2 @@
-export * from './parasutClient';
+export * from './parasut-client';
 export * from './types';
