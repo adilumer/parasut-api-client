@@ -151,4 +151,40 @@ export class SalesInvoiceModule extends BaseModule {
       data: {},
     });
   }
-} 
+
+  /**
+   * Create payment for a sales invoice.
+   * POST /v4/{company_id}/sales_invoices/{invoice_id}/payments
+   */
+  public async createPayment(invoiceId: string, data: any): Promise<any> {
+    return this.authorizedRequest({
+      method: 'post',
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/payments`,
+      data,
+    });
+  }
+
+  /**
+   * Recover a cancelled sales invoice.
+   * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/recover
+   */
+  public async recover(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
+      method: 'patch',
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/recover`,
+      data: {},
+    });
+  }
+
+  /**
+   * Convert sales invoice to invoice.
+   * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/convert_to_invoice
+   */
+  public async convertToInvoice(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
+      method: 'patch',
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/convert_to_invoice`,
+      data: {},
+    });
+  }
+}
