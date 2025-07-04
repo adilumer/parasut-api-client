@@ -9,6 +9,21 @@ import { SalariesModule } from './modules/salaries';
 import { TaxesModule } from './modules/taxes';
 import { EmployeesModule } from './modules/employees';
 import { EInvoiceInboxesModule } from './modules/e-invoice-inboxes';
+import { EArchiveModule } from './modules/e-archive';
+import { EInvoiceModule } from './modules/e-invoice';
+import { ESmmModule } from './modules/e-smm';
+import { AccountsModule } from './modules/accounts';
+import { ProductsModule } from './modules/products';
+import { ItemCategoriesModule } from './modules/item-categories';
+import { TagsModule } from './modules/tags';
+import { WarehousesModule } from './modules/warehouses';
+import { TransactionsModule } from './modules/transactions';
+import { ShipmentDocumentsModule } from './modules/shipment-documents';
+import { StockMovementsModule } from './modules/stock-movements';
+import { StockUpdatesModule } from './modules/stock-updates';
+import { InventoryLevelsModule } from './modules/inventory-levels';
+import { TrackableJobsModule } from './modules/trackable-jobs';
+import { WebhooksModule } from './modules/webhooks';
 
 /**
  * Parasut API Client
@@ -16,7 +31,6 @@ import { EInvoiceInboxesModule } from './modules/e-invoice-inboxes';
  *
  * Usage:
  *   const client = new ParasutClient({ ... });
- *   await client.getCompanies();
  */
 export class ParasutClient {
   public options: any;
@@ -32,9 +46,26 @@ export class ParasutClient {
   public taxes: TaxesModule;
   public employees: EmployeesModule;
   public eInvoiceInboxes: EInvoiceInboxesModule;
+  public eArchive: EArchiveModule;
+  public eInvoice: EInvoiceModule;
+  public eSmm: ESmmModule;
+  public accounts: AccountsModule;
+  public products: ProductsModule;
+  public itemCategories: ItemCategoriesModule;
+  public tags: TagsModule;
+  public warehouses: WarehousesModule;
+  public transactions: TransactionsModule;
+  public shipmentDocuments: ShipmentDocumentsModule;
+  public stockMovements: StockMovementsModule;
+  public stockUpdates: StockUpdatesModule;
+  public inventoryLevels: InventoryLevelsModule;
+  public trackableJobs: TrackableJobsModule;
+  public webhooks: WebhooksModule;
   
   /**
    * @param options - Parasut API credentials and options
+   * @param options.companyId - The company ID to use for API requests (required)
+   *                           If not provided, will use clientId as companyId.
    * @param options.clientId - OAuth client ID
    * @param options.clientSecret - OAuth client secret
    * @param options.username - Parasut username (email)
@@ -62,7 +93,22 @@ export class ParasutClient {
     this.taxes = new TaxesModule(options);
     this.employees = new EmployeesModule(options);
     this.eInvoiceInboxes = new EInvoiceInboxesModule(options);
+    this.eArchive = new EArchiveModule(options);
+    this.eInvoice = new EInvoiceModule(options);
+    this.eSmm = new ESmmModule(options);
+    this.accounts = new AccountsModule(options);
+    this.products = new ProductsModule(options);
+    this.itemCategories = new ItemCategoriesModule(options);
+    this.tags = new TagsModule(options);
+    this.warehouses = new WarehousesModule(options);
+    this.transactions = new TransactionsModule(options);
+    this.shipmentDocuments = new ShipmentDocumentsModule(options);
+    this.stockMovements = new StockMovementsModule(options);
+    this.stockUpdates = new StockUpdatesModule(options);
+    this.inventoryLevels = new InventoryLevelsModule(options);
+    this.trackableJobs = new TrackableJobsModule(options);
+    this.webhooks = new WebhooksModule(options);
   }
 
-  // ... methods to be implemented ...
+  
 }
