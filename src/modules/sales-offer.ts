@@ -1,27 +1,20 @@
-import { ParasutClient } from '../parasutClient';
+import { ParasutClient } from '../parasut-client';
+import { BaseModule } from './base-module';
 
 /**
  * SalesOfferModule: Handles all /sales_offers endpoints for a company.
  */
-export class SalesOfferModule {
-  private requestOrchestrator: <T = any>(config: {
-    method: 'get' | 'post' | 'put' | 'patch' | 'delete';
-    url: string;
-    data?: any;
-    params?: Record<string, any>;
-    headers?: Record<string, string>;
-    responseType?: string;
-  }) => Promise<T>;
-
-  constructor(requestOrchestrator: SalesOfferModule['requestOrchestrator']) {
-    this.requestOrchestrator = requestOrchestrator;
+export class SalesOfferModule extends BaseModule {
+  
+  constructor(options:any) {
+    super(options);
   }
 
   /**
    * List all sales offers for a company.
    */
   public async list(companyId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'get',
       url: `/${companyId}/sales_offers`,
       params,
@@ -32,7 +25,7 @@ export class SalesOfferModule {
    * Retrieve a single sales offer by ID.
    */
   public async get(companyId: string, offerId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'get',
       url: `/${companyId}/sales_offers/${offerId}`,
       params,
@@ -43,7 +36,7 @@ export class SalesOfferModule {
    * Create a new sales offer.
    */
   public async create(companyId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'post',
       url: `/${companyId}/sales_offers`,
       data,
@@ -55,7 +48,7 @@ export class SalesOfferModule {
    * Update an existing sales offer.
    */
   public async update(companyId: string, offerId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'put',
       url: `/${companyId}/sales_offers/${offerId}`,
       data,
@@ -67,7 +60,7 @@ export class SalesOfferModule {
    * Delete a sales offer.
    */
   public async delete(companyId: string, offerId: string): Promise<void> {
-    await this.requestOrchestrator({
+    await this.authorizedRequest({
       method: 'delete',
       url: `/${companyId}/sales_offers/${offerId}`,
     });
@@ -81,7 +74,7 @@ export class SalesOfferModule {
    * @param params - Optional query parameters
    */
   public async listLines(companyId: string, offerId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'get',
       url: `/${companyId}/sales_offers/${offerId}/lines`,
       params,
@@ -96,7 +89,7 @@ export class SalesOfferModule {
    * @param data - Optional data for conversion (e.g., invoice attributes)
    */
   public async convertToSalesInvoice(companyId: string, offerId: string, data: any = {}): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'post',
       url: `/${companyId}/sales_offers/${offerId}/convert_to_sales_invoice`,
       data,
@@ -112,7 +105,7 @@ export class SalesOfferModule {
    * @returns PDF file or download link
    */
   public async print(companyId: string, offerId: string): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'get',
       url: `/${companyId}/sales_offers/${offerId}/print`,
       responseType: 'arraybuffer',
@@ -126,7 +119,7 @@ export class SalesOfferModule {
    * @param offerId - The sales offer ID
    */
   public async cancel(companyId: string, offerId: string): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'patch',
       url: `/${companyId}/sales_offers/${offerId}/cancel`,
     });
@@ -140,7 +133,7 @@ export class SalesOfferModule {
    * @param data - Email data (e.g., recipient, subject, body)
    */
   public async sendEmail(companyId: string, offerId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'post',
       url: `/${companyId}/sales_offers/${offerId}/send_email`,
       data,
@@ -153,7 +146,7 @@ export class SalesOfferModule {
    * POST /v4/{company_id}/sales_offers/{offer_id}/duplicate
    */
   public async duplicate(companyId: string, offerId: string): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'post',
       url: `/${companyId}/sales_offers/${offerId}/duplicate`,
     });
@@ -164,7 +157,7 @@ export class SalesOfferModule {
    * PATCH /v4/{company_id}/sales_offers/{offer_id}/archive
    */
   public async archive(companyId: string, offerId: string): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'patch',
       url: `/${companyId}/sales_offers/${offerId}/archive`,
       data: {},
@@ -176,7 +169,7 @@ export class SalesOfferModule {
    * PATCH /v4/{company_id}/sales_offers/{offer_id}/unarchive
    */
   public async unarchive(companyId: string, offerId: string): Promise<any> {
-    return this.requestOrchestrator({
+    return this.authorizedRequest({
       method: 'patch',
       url: `/${companyId}/sales_offers/${offerId}/unarchive`,
       data: {},
