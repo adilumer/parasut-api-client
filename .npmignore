@@ -1,0 +1,49 @@
+# Development files
+src/
+tsconfig.json
+jest.config.js
+.gitignore
+.git/
+.github/
+.vscode/
+.idea/
+
+# Test files
+*.test.ts
+*.test.js
+__tests__/
+test/
+tests/
+coverage/
+test-package.js
+
+# Build artifacts
+*.tsbuildinfo
+.nyc_output/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Reference files
+refrence/
+docs/
+examples/
+
+# Lock files (optional - some prefer to include them)
+yarn.lock
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
