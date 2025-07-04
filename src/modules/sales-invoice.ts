@@ -1,28 +1,22 @@
+import { BaseModule } from "./base-module";
+
 /**
  * SalesInvoiceModule: Handles all /sales_invoices endpoints for a company.
  */
-export class SalesInvoiceModule {
-  private requestOrchestrator: <T = any>(config: {
-    method: 'get' | 'post' | 'put' | 'patch' | 'delete';
-    url: string;
-    data?: any;
-    params?: Record<string, any>;
-    headers?: Record<string, string>;
-    responseType?: string;
-  }) => Promise<T>;
-
-  constructor(requestOrchestrator: SalesInvoiceModule['requestOrchestrator']) {
-    this.requestOrchestrator = requestOrchestrator;
+export class SalesInvoiceModule extends BaseModule {
+  
+  constructor(options:any) {
+    super(options);
   }
 
   /**
    * List all sales invoices for a company.
    * GET /v4/{company_id}/sales_invoices
    */
-  public async list(companyId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+  public async list(params: Record<string, any> = {}): Promise<any> {
+    return this.authorizedRequest({
       method: 'get',
-      url: `/${companyId}/sales_invoices`,
+      url: `/${this.companyId}/sales_invoices`,
       params,
     });
   }
@@ -31,10 +25,10 @@ export class SalesInvoiceModule {
    * Get a sales invoice by ID.
    * GET /v4/{company_id}/sales_invoices/{invoice_id}
    */
-  public async get(companyId: string, invoiceId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+  public async get(invoiceId: string, params: Record<string, any> = {}): Promise<any> {
+    return this.authorizedRequest({
       method: 'get',
-      url: `/${companyId}/sales_invoices/${invoiceId}`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
       params,
     });
   }
@@ -43,10 +37,10 @@ export class SalesInvoiceModule {
    * Create a new sales invoice.
    * POST /v4/{company_id}/sales_invoices
    */
-  public async create(companyId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+  public async create(data: any): Promise<any> {
+    return this.authorizedRequest({
       method: 'post',
-      url: `/${companyId}/sales_invoices`,
+      url: `/${this.companyId}/sales_invoices`,
       data,
     });
   }
@@ -55,10 +49,10 @@ export class SalesInvoiceModule {
    * Update a sales invoice.
    * PUT /v4/{company_id}/sales_invoices/{invoice_id}
    */
-  public async update(companyId: string, invoiceId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+  public async update(invoiceId: string, data: any): Promise<any> {
+    return this.authorizedRequest({
       method: 'put',
-      url: `/${companyId}/sales_invoices/${invoiceId}`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
       data,
     });
   }
@@ -67,10 +61,10 @@ export class SalesInvoiceModule {
    * Delete a sales invoice.
    * DELETE /v4/{company_id}/sales_invoices/{invoice_id}
    */
-  public async delete(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async delete(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'delete',
-      url: `/${companyId}/sales_invoices/${invoiceId}`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
     });
   }
 
@@ -78,10 +72,10 @@ export class SalesInvoiceModule {
    * List all lines for a sales invoice.
    * GET /v4/{company_id}/sales_invoices/{invoice_id}/lines
    */
-  public async listLines(companyId: string, invoiceId: string, params: Record<string, any> = {}): Promise<any> {
-    return this.requestOrchestrator({
+  public async listLines(invoiceId: string, params: Record<string, any> = {}): Promise<any> {
+    return this.authorizedRequest({
       method: 'get',
-      url: `/${companyId}/sales_invoices/${invoiceId}/lines`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/lines`,
       params,
     });
   }
@@ -90,10 +84,10 @@ export class SalesInvoiceModule {
    * Print a sales invoice (PDF).
    * GET /v4/{company_id}/sales_invoices/{invoice_id}/print
    */
-  public async print(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async print(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'get',
-      url: `/${companyId}/sales_invoices/${invoiceId}/print`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/print`,
       responseType: 'arraybuffer',
     });
   }
@@ -102,10 +96,10 @@ export class SalesInvoiceModule {
    * Send a sales invoice by email.
    * POST /v4/{company_id}/sales_invoices/{invoice_id}/send_email
    */
-  public async sendEmail(companyId: string, invoiceId: string, data: any): Promise<any> {
-    return this.requestOrchestrator({
+  public async sendEmail(invoiceId: string, data: any): Promise<any> {
+    return this.authorizedRequest({
       method: 'post',
-      url: `/${companyId}/sales_invoices/${invoiceId}/send_email`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/send_email`,
       data,
     });
   }
@@ -114,10 +108,10 @@ export class SalesInvoiceModule {
    * Cancel a sales invoice.
    * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/cancel
    */
-  public async cancel(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async cancel(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'patch',
-      url: `/${companyId}/sales_invoices/${invoiceId}/cancel`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/cancel`,
       data: {},
     });
   }
@@ -126,10 +120,10 @@ export class SalesInvoiceModule {
    * Archive a sales invoice.
    * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/archive
    */
-  public async archive(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async archive(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'patch',
-      url: `/${companyId}/sales_invoices/${invoiceId}/archive`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/archive`,
       data: {},
     });
   }
@@ -138,10 +132,10 @@ export class SalesInvoiceModule {
    * Unarchive a sales invoice.
    * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/unarchive
    */
-  public async unarchive(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async unarchive(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'patch',
-      url: `/${companyId}/sales_invoices/${invoiceId}/unarchive`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/unarchive`,
       data: {},
     });
   }
@@ -150,10 +144,10 @@ export class SalesInvoiceModule {
    * Approve a sales invoice.
    * PATCH /v4/{company_id}/sales_invoices/{invoice_id}/approve
    */
-  public async approve(companyId: string, invoiceId: string): Promise<any> {
-    return this.requestOrchestrator({
+  public async approve(invoiceId: string): Promise<any> {
+    return this.authorizedRequest({
       method: 'patch',
-      url: `/${companyId}/sales_invoices/${invoiceId}/approve`,
+      url: `/${this.companyId}/sales_invoices/${invoiceId}/approve`,
       data: {},
     });
   }
