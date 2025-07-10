@@ -1,26 +1,55 @@
 import axios, * as Axios from 'axios';
 
 export class BaseModule {
+  private static credStore:{
+    [key:string]: {
+      accessToken?: string;
+      tokenExpiresAt: number;
+      companyId: string;
+      clientId: string;
+      clientSecret: string;
+      username: string;
+      password: string;
+      baseUrl: string;
+    }
+  } = {};
   
-  private baseUrl: string;
-  private clientId: string;
-  private clientSecret: string;
-  private username: string;
-  private password: string;
+  private xid: number|string;
+  private baseUrl: string;  
   
   protected axios: Axios.AxiosInstance;
   protected accessToken: string | null = null;
   protected tokenExpiresAt: number = 0;
   protected companyId: string;
   
+  public onTokenReceived: Function | null = null;
   constructor(options: any){
-    this.companyId = options.companyId ?? options.clientId;
-    this.clientId = options.clientId;
-    this.clientSecret = options.clientSecret;
-    this.username = options.username;
-    this.password = options.password;
-    this.baseUrl = options.baseUrl || 'https://api.parasut.com/v4';
-    this.axios = axios.create({ baseURL: this.baseUrl }); 
+    this.onTokenReceived = options.onTokenReceived || null;
+    this.xid = options.xid;
+    this.companyId = options.companyId;
+    this.baseUrl = options.baseUrl || 'https://api.parasut.com';
+    this.axios = axios.create({ 
+      baseURL: this.baseUrl
+     }); 
+
+    BaseModule.credStore[this.xid] = {
+      accessToken: undefined,
+      tokenExpiresAt: 0,
+      companyId: this.companyId,
+      clientId: options.clientId,
+      clientSecret: options.clientSecret,
+      username: options.username,
+      password: options.password,
+      baseUrl: this.baseUrl,
+    };
+  }
+
+  public static updateToken(token: string, expiresAt: number, xid:string|number): void {
+    if (!BaseModule.credStore[xid]) {
+      throw new Error(`No credentials found for xid: ${xid}`);
+    }
+    BaseModule.credStore[xid].accessToken = token;
+    BaseModule.credStore[xid].tokenExpiresAt = expiresAt;
   }
 
   /**
@@ -31,14 +60,14 @@ export class BaseModule {
    */
   protected async getAccessToken(): Promise<string> {
     const now = Date.now();
-    if (this.accessToken && now < this.tokenExpiresAt) {
-      return this.accessToken;
+    if (BaseModule.credStore[this.xid]?.accessToken && now < BaseModule.credStore[this.xid]?.tokenExpiresAt) {
+      return BaseModule.credStore[this.xid]?.accessToken!;
     }
     await this.authenticate();
-    if (!this.accessToken) {
+    if (!BaseModule.credStore[this.xid]?.accessToken) {
       throw new Error('Failed to obtain access token');
     }
-    return this.accessToken;
+    return BaseModule.credStore[this.xid]?.accessToken!;
   }
 
   /**
@@ -48,18 +77,19 @@ export class BaseModule {
    */
   private async authenticate(): Promise<void> {
     // Input validation
-    if (!this.clientId || !this.clientSecret || !this.username || !this.password) {
+    if (!BaseModule.credStore[this.xid]?.clientId || !BaseModule.credStore[this.xid]?.clientSecret || !BaseModule.credStore[this.xid]?.username || !BaseModule.credStore[this.xid]?.password) {
       throw new Error('Missing required authentication credentials');
     }
+
     try {
       const response = await this.axios.post(
         '/oauth/token',
         {
           grant_type: 'password',
-          client_id: this.clientId,
-          client_secret: this.clientSecret,
-          username: this.username,
-          password: this.password,
+          client_id: BaseModule.credStore[this.xid]?.clientId,
+          client_secret: BaseModule.credStore[this.xid]?.clientSecret,
+          username: BaseModule.credStore[this.xid]?.username,
+          password: BaseModule.credStore[this.xid]?.password,
         },
         {
           baseURL: this.baseUrl,
@@ -70,8 +100,10 @@ export class BaseModule {
       if (!access_token || !expires_in) {
         throw new Error('Invalid authentication response');
       }
-      this.accessToken = access_token;
-      this.tokenExpiresAt = Date.now() + (expires_in * 1000) - 60000; // 1 min early
+      
+      BaseModule.credStore[this.xid].accessToken = access_token;
+      BaseModule.credStore[this.xid].tokenExpiresAt = Date.now() + (expires_in * 1000) - 60000; // 1 min early
+      this.onTokenReceived?.(access_token, BaseModule.credStore[this.xid].tokenExpiresAt, this.xid);
     } catch (error: any) {
       if (error.response) {
         throw new Error(`Authentication failed: ${error.response.status} ${error.response.statusText}`);
@@ -93,6 +125,8 @@ export class BaseModule {
     responseType?: string;
   }): Promise<T> {
     const token = await this.getAccessToken();
+
+    console.log(`[${this.xid}] Making request: ${config.method.toUpperCase()} ${config.url} with token: ${token}`);
     const headers = {
       Authorization: `Bearer ${token}`,
       ...(config.headers || {}),

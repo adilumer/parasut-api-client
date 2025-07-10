@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * StockMovementsModule: Handles all /stock_movements endpoints.
  */
 export class StockMovementsModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class StockMovementsModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/stock_movements`,
+      url: `/v4/${this.companyId}/stock_movements`,
       params,
     });
   }
@@ -27,7 +27,7 @@ export class StockMovementsModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/stock_movements`,
+      url: `/v4/${this.companyId}/stock_movements`,
       data,
     });
   }

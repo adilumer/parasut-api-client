@@ -1,4 +1,3 @@
-import { ParasutClient } from '../parasut-client';
 import { BaseModule } from './base-module';
 
 /**
@@ -19,7 +18,7 @@ export class ApiHomeModule extends BaseModule {
   public async get(): Promise<any> {
     const token = await this.getAccessToken();
     try {
-      const response = await this.axios.get('/me', {
+      const response = await this.axios.get('/v4/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;

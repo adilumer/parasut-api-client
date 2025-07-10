@@ -5,7 +5,7 @@ import { BaseModule } from './base-module';
  */
 export class EInvoiceInboxesModule extends BaseModule {
 
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -16,7 +16,7 @@ export class EInvoiceInboxesModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_invoice_inboxes`,
+      url: `/v4/${this.companyId}/e_invoice_inboxes`,
       params,
     });
   }
@@ -28,7 +28,7 @@ export class EInvoiceInboxesModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_invoice_inboxes/${id}`,
+      url: `/v4/${this.companyId}/e_invoice_inboxes/${id}`,
       params,
     });
   }

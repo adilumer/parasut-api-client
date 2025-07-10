@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * WebhooksModule: Handles all /webhooks endpoints.
  */
 export class WebhooksModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class WebhooksModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/webhooks`,
+      url: `/v4/${this.companyId}/webhooks`,
       params,
     });
   }
@@ -27,7 +27,7 @@ export class WebhooksModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/webhooks/${id}`,
+      url: `/v4/${this.companyId}/webhooks/${id}`,
       params,
     });
   }
@@ -39,7 +39,7 @@ export class WebhooksModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/webhooks`,
+      url: `/v4/${this.companyId}/webhooks`,
       data,
     });
   }
@@ -51,7 +51,7 @@ export class WebhooksModule extends BaseModule {
   public async update(id: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/webhooks/${id}`,
+      url: `/v4/${this.companyId}/webhooks/${id}`,
       data,
     });
   }
@@ -63,7 +63,7 @@ export class WebhooksModule extends BaseModule {
   public async delete(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/webhooks/${id}`,
+      url: `/v4/${this.companyId}/webhooks/${id}`,
     });
   }
 }

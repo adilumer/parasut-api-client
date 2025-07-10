@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * EArchiveModule: Handles all /e_archives endpoints.
  */
 export class EArchiveModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class EArchiveModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/e_archives`,
+      url: `/v4/${this.companyId}/e_archives`,
       data,
     });
   }
@@ -27,7 +27,7 @@ export class EArchiveModule extends BaseModule {
   public async show(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_archives/${id}`,
+      url: `/v4/${this.companyId}/e_archives/${id}`,
       params,
     });
   }
@@ -39,7 +39,7 @@ export class EArchiveModule extends BaseModule {
   public async showPdf(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_archives/${id}/pdf`,
+      url: `/v4/${this.companyId}/e_archives/${id}/pdf`,
       params,
       responseType: 'arraybuffer',
     });

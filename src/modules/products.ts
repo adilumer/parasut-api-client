@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * ProductsModule: Handles all /products endpoints.
  */
 export class ProductsModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class ProductsModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/products`,
+      url: `/v4/${this.companyId}/products`,
       params,
     });
   }
@@ -27,7 +27,7 @@ export class ProductsModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/products/${id}`,
+      url: `/v4/${this.companyId}/products/${id}`,
       params,
     });
   }
@@ -39,7 +39,7 @@ export class ProductsModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/products`,
+      url: `/v4/${this.companyId}/products`,
       data,
     });
   }
@@ -51,7 +51,7 @@ export class ProductsModule extends BaseModule {
   public async update(id: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/products/${id}`,
+      url: `/v4/${this.companyId}/products/${id}`,
       data,
     });
   }
@@ -63,7 +63,7 @@ export class ProductsModule extends BaseModule {
   public async delete(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/products/${id}`,
+      url: `/v4/${this.companyId}/products/${id}`,
     });
   }
 }

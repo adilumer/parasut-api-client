@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * EInvoiceModule: Handles all /e_invoices endpoints.
  */
 export class EInvoiceModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class EInvoiceModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/e_invoices`,
+      url: `/v4/${this.companyId}/e_invoices`,
       data,
     });
   }
@@ -27,7 +27,7 @@ export class EInvoiceModule extends BaseModule {
   public async show(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_invoices/${id}`,
+      url: `/v4/${this.companyId}/e_invoices/${id}`,
       params,
     });
   }
@@ -39,7 +39,7 @@ export class EInvoiceModule extends BaseModule {
   public async showPdf(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/e_invoices/${id}/pdf`,
+      url: `/v4/${this.companyId}/e_invoices/${id}/pdf`,
       params,
       responseType: 'arraybuffer',
     });

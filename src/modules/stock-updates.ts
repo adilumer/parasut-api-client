@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * StockUpdatesModule: Handles all /stock_updates endpoints.
  */
 export class StockUpdatesModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class StockUpdatesModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/stock_updates`,
+      url: `/v4/${this.companyId}/stock_updates`,
       data,
     });
   }

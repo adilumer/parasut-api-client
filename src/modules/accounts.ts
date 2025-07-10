@@ -1,10 +1,11 @@
+import { Account } from '../types';
 import { BaseModule } from './base-module';
 
 /**
  * AccountsModule: Handles all /accounts endpoints.
  */
 export class AccountsModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -13,11 +14,12 @@ export class AccountsModule extends BaseModule {
    * GET /v4/{company_id}/accounts
    */
   public async list(params: Record<string, any> = {}): Promise<any> {
-    return this.authorizedRequest({
+    const xResp: Account[] = await this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/accounts`,
+      url: `/v4/${this.companyId}/accounts`,
       params,
     });
+    return xResp;
   }
 
   /**
@@ -27,7 +29,7 @@ export class AccountsModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/accounts/${id}`,
+      url: `/v4/${this.companyId}/accounts/${id}`,
       params,
     });
   }
@@ -39,7 +41,7 @@ export class AccountsModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/accounts`,
+      url: `/v4/${this.companyId}/accounts`,
       data,
     });
   }
@@ -51,7 +53,7 @@ export class AccountsModule extends BaseModule {
   public async update(id: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/accounts/${id}`,
+      url: `/v4/${this.companyId}/accounts/${id}`,
       data,
     });
   }
@@ -63,7 +65,7 @@ export class AccountsModule extends BaseModule {
   public async delete(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/accounts/${id}`,
+      url: `/v4/${this.companyId}/accounts/${id}`,
     });
   }
 
@@ -74,7 +76,7 @@ export class AccountsModule extends BaseModule {
   public async archive(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/accounts/${id}/archive`,
+      url: `/v4/${this.companyId}/accounts/${id}/archive`,
     });
   }
 
@@ -85,7 +87,7 @@ export class AccountsModule extends BaseModule {
   public async unarchive(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/accounts/${id}/unarchive`,
+      url: `/v4/${this.companyId}/accounts/${id}/unarchive`,
     });
   }
 
@@ -96,7 +98,7 @@ export class AccountsModule extends BaseModule {
   public async listTransactions(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/accounts/${id}/transactions`,
+      url: `/v4/${this.companyId}/accounts/${id}/transactions`,
       params,
     });
   }
@@ -108,7 +110,7 @@ export class AccountsModule extends BaseModule {
   public async getTransaction(id: string, transactionId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/accounts/${id}/transactions/${transactionId}`,
+      url: `/v4/${this.companyId}/accounts/${id}/transactions/${transactionId}`,
       params,
     });
   }
@@ -154,7 +156,7 @@ export class AccountsModule extends BaseModule {
   public async createDebitTransaction(id: string, data: any, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/accounts/${id}/debit_transactions`,
+      url: `/v4/${this.companyId}/accounts/${id}/debit_transactions`,
       data,
       params,
     });
@@ -167,7 +169,7 @@ export class AccountsModule extends BaseModule {
   public async createCreditTransaction(id: string, data: any, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/accounts/${id}/credit_transactions`,
+      url: `/v4/${this.companyId}/accounts/${id}/credit_transactions`,
       data,
       params,
     });

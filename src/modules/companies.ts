@@ -17,7 +17,7 @@ export class CompaniesModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/companies`,
+      url: `/v4/companies`,
       params,
     });
   }
@@ -29,7 +29,7 @@ export class CompaniesModule extends BaseModule {
   public async get(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/companies/${this.companyId}`,
+      url: `/v4/companies/${this.companyId}`,
       params,
     });
   }
@@ -41,7 +41,7 @@ export class CompaniesModule extends BaseModule {
   public async update(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/companies/${this.companyId}`,
+      url: `/v4/companies/${this.companyId}`,
       data,
     });
   }

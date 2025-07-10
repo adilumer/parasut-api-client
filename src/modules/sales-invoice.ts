@@ -16,7 +16,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_invoices`,
+      url: `/v4/${this.companyId}/sales_invoices`,
       params,
     });
   }
@@ -28,7 +28,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async get(invoiceId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}`,
       params,
     });
   }
@@ -40,7 +40,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/sales_invoices`,
+      url: `/v4/${this.companyId}/sales_invoices`,
       data,
     });
   }
@@ -52,7 +52,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async update(invoiceId: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}`,
       data,
     });
   }
@@ -64,7 +64,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async delete(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}`,
     });
   }
 
@@ -75,7 +75,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async listLines(invoiceId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/lines`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/lines`,
       params,
     });
   }
@@ -87,7 +87,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async print(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/print`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/print`,
       responseType: 'arraybuffer',
     });
   }
@@ -99,7 +99,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async sendEmail(invoiceId: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/send_email`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/send_email`,
       data,
     });
   }
@@ -111,7 +111,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async cancel(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/cancel`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/cancel`,
       data: {},
     });
   }
@@ -123,7 +123,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async archive(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/archive`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/archive`,
       data: {},
     });
   }
@@ -135,7 +135,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async unarchive(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/unarchive`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/unarchive`,
       data: {},
     });
   }
@@ -147,7 +147,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async approve(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/approve`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/approve`,
       data: {},
     });
   }
@@ -159,7 +159,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async createPayment(invoiceId: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/payments`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/payments`,
       data,
     });
   }
@@ -171,7 +171,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async recover(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/recover`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/recover`,
       data: {},
     });
   }
@@ -183,7 +183,7 @@ export class SalesInvoiceModule extends BaseModule {
   public async convertToInvoice(invoiceId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_invoices/${invoiceId}/convert_to_invoice`,
+      url: `/v4/${this.companyId}/sales_invoices/${invoiceId}/convert_to_invoice`,
       data: {},
     });
   }

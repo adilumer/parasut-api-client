@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * TransactionsModule: Handles all /transactions endpoints.
  */
 export class TransactionsModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class TransactionsModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/transactions/${id}`,
+      url: `/v4/${this.companyId}/transactions/${id}`,
       params,
     });
   }
@@ -27,7 +27,7 @@ export class TransactionsModule extends BaseModule {
   public async update(id: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/transactions/${id}`,
+      url: `/v4/${this.companyId}/transactions/${id}`,
       data,
     });
   }
@@ -39,7 +39,7 @@ export class TransactionsModule extends BaseModule {
   public async delete(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/transactions/${id}`,
+      url: `/v4/${this.companyId}/transactions/${id}`,
     });
   }
 }

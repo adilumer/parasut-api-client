@@ -121,14 +121,3 @@ static/asset/
 .angular/
 
 docker/image
-
-docs/changed_sql_files.txt
-docs/sql_hashes_before.json
-.cursorrules
-db-schema/backups/*
-
-asset/system
-asset/user
-asset/integrator
-asset/permission
-asset/externa

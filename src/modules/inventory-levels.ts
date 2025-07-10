@@ -4,7 +4,7 @@ import { BaseModule } from './base-module';
  * InventoryLevelsModule: Handles all /inventory_levels endpoints.
  */
 export class InventoryLevelsModule extends BaseModule {
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -15,7 +15,7 @@ export class InventoryLevelsModule extends BaseModule {
   public async list(productId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/product/${productId}/inventory_levels`,
+      url: `/v4/${this.companyId}/product/${productId}/inventory_levels`,
       params,
     });
   }

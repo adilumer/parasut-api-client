@@ -30,13 +30,42 @@ npm install parasut-api-client
 import { ParasutClient } from 'parasut-api-client';
 
 const client = new ParasutClient({
+  xid: 'DUMMY_LOCAL_ID',
   clientId: 'YOUR_CLIENT_ID',
   clientSecret: 'YOUR_CLIENT_SECRET',
   username: 'YOUR_EMAIL',
   password: 'YOUR_PASSWORD',
-  companyId: 'YOUR_COMPANY_ID', // Optional: defaults to clientId
-  baseUrl: 'https://api.parasut.com/v4' // Optional: defaults to v4
+  companyId: 'YOUR_COMPANY_ID', // If not provided, the first company in the companies list will be used.
+  onTokenReceived: function(token, expiresAt, xid){}, // optional
+  baseUrl: 'https://api.parasut.com' // Optional
 });
+
+await client.initialize();
+```
+
+### Working with multiple clients
+
+The `xid` parameter is used to identify a client. If you have multiple clusters running and you don't want to send multiple auth requests for each of them; or you want to may be cache the token in REDIS for later use/preserve across restarts etc, you can define an `xid` for your ease. When the authorization request is made, the `onTokenReceived` function will be triggered and you'd be able to use the token as you need.
+
+```typescript
+
+const clientOne =  new ParasutClient({
+  ...
+  onTokenReceived: function(token, expiresAt, xid){
+    // Cache with REDIS, for example.
+    someRedisConnector.HSET(`parasut-cache-${xid}`, {token, expiresAt});
+  }
+});
+
+const clientTwo =  new ParasutClient({
+  ...,
+  onTokenReceived: function(token, expiresAt, xid){
+    // Trigger an event emitter perhaps?
+    // Or update the cache for clientOne...
+    clientOne.updateToken(token, expiresAt, xid);
+  }
+});
+
 ```
 
 ### Working with Contacts
@@ -140,27 +169,27 @@ const product = await client.products.create({
 
 The client is organized into logical modules matching the Parasut API structure:
 
-| Module | Description | Key Operations |
-|--------|-------------|----------------|
-| `client.companies` | Company management | list, show, update settings |
-| `client.contacts` | Customers & vendors | CRUD operations, contact people |
-| `client.products` | Product catalog | CRUD operations, inventory tracking |
-| `client.salesInvoice` | Sales invoices | CRUD, PDF generation, payments |
-| `client.salesOffer` | Sales offers | CRUD, convert to invoice |
-| `client.purchaseBills` | Purchase bills | CRUD, payment management |
-| `client.accounts` | Chart of accounts | CRUD, transactions |
-| `client.transactions` | Financial transactions | Debit/credit operations |
-| `client.stockMovements` | Inventory movements | Track stock changes |
-| `client.warehouses` | Warehouse management | CRUD operations |
-| `client.shipmentDocuments` | Shipment documents | İrsaliye management |
-| `client.eInvoice` | E-Invoice operations | Turkish e-invoice system |
-| `client.eArchive` | E-Archive operations | Turkish e-archive system |
-| `client.bankFees` | Bank fees | Fee management |
-| `client.salaries` | Salary management | Employee salary tracking |
-| `client.employees` | Employee management | CRUD operations |
-| `client.taxes` | Tax management | Tax calculations |
-| `client.tags` | Tagging system | Organize resources |
-| `client.webhooks` | Webhook management | Event notifications |
+| Module                     | Description            | Key Operations                      |
+| -------------------------- | ---------------------- | ----------------------------------- |
+| `client.companies`         | Company management     | list, show, update settings         |
+| `client.contacts`          | Customers & vendors    | CRUD operations, contact people     |
+| `client.products`          | Product catalog        | CRUD operations, inventory tracking |
+| `client.salesInvoice`      | Sales invoices         | CRUD, PDF generation, payments      |
+| `client.salesOffer`        | Sales offers           | CRUD, convert to invoice            |
+| `client.purchaseBills`     | Purchase bills         | CRUD, payment management            |
+| `client.accounts`          | Chart of accounts      | CRUD, transactions                  |
+| `client.transactions`      | Financial transactions | Debit/credit operations             |
+| `client.stockMovements`    | Inventory movements    | Track stock changes                 |
+| `client.warehouses`        | Warehouse management   | CRUD operations                     |
+| `client.shipmentDocuments` | Shipment documents     | İrsaliye management                 |
+| `client.eInvoice`          | E-Invoice operations   | Turkish e-invoice system            |
+| `client.eArchive`          | E-Archive operations   | Turkish e-archive system            |
+| `client.bankFees`          | Bank fees              | Fee management                      |
+| `client.salaries`          | Salary management      | Employee salary tracking            |
+| `client.employees`         | Employee management    | CRUD operations                     |
+| `client.taxes`             | Tax management         | Tax calculations                    |
+| `client.tags`              | Tagging system         | Organize resources                  |
+| `client.webhooks`          | Webhook management     | Event notifications                 |
 
 ## 🔐 Authentication
 
@@ -180,19 +209,6 @@ import { SalesInvoice, Contact, Product } from 'parasut-api-client';
 // Full type safety and IntelliSense
 const invoice: SalesInvoice = await client.salesInvoice.show('123');
 const contact: Contact = await client.contacts.show(invoice.relationships?.contact?.data.id);
-```
-
-## 🔧 Configuration Options
-
-```typescript
-const client = new ParasutClient({
-  clientId: 'YOUR_CLIENT_ID',        // Required: OAuth client ID
-  clientSecret: 'YOUR_CLIENT_SECRET', // Required: OAuth client secret
-  username: 'YOUR_EMAIL',             // Required: Parasut account email
-  password: 'YOUR_PASSWORD',          // Required: Parasut account password
-  companyId: 'YOUR_COMPANY_ID',       // Optional: defaults to clientId
-  baseUrl: 'https://api.parasut.com/v4' // Optional: API base URL
-});
 ```
 
 ## 🚀 Advanced Usage

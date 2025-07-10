@@ -5,7 +5,7 @@ import { BaseModule } from './base-module';
  */
 export class ContactsModule extends BaseModule {
 
-  constructor(options: any) {
+  constructor(options:any) {
     super(options);
   }
 
@@ -16,7 +16,7 @@ export class ContactsModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/contacts`,
+      url: `/v4/${this.companyId}/contacts`,
       params,
     });
   }
@@ -28,7 +28,7 @@ export class ContactsModule extends BaseModule {
   public async get(id: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/contacts/${id}`,
+      url: `/v4/${this.companyId}/contacts/${id}`,
       params,
     });
   }
@@ -40,7 +40,7 @@ export class ContactsModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/contacts`,
+      url: `/v4/${this.companyId}/contacts`,
       data,
     });
   }
@@ -52,7 +52,7 @@ export class ContactsModule extends BaseModule {
   public async update(id: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/contacts/${id}`,
+      url: `/v4/${this.companyId}/contacts/${id}`,
       data,
     });
   }
@@ -64,7 +64,7 @@ export class ContactsModule extends BaseModule {
   public async delete(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/contacts/${id}`,
+      url: `/v4/${this.companyId}/contacts/${id}`,
     });
   }
 
@@ -75,7 +75,7 @@ export class ContactsModule extends BaseModule {
   public async archive(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/contacts/${id}/archive`,
+      url: `/v4/${this.companyId}/contacts/${id}/archive`,
     });
   }
 
@@ -86,7 +86,7 @@ export class ContactsModule extends BaseModule {
   public async unarchive(id: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/contacts/${id}/unarchive`,
+      url: `/v4/${this.companyId}/contacts/${id}/unarchive`,
     });
   }
 }

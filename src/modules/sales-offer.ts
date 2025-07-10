@@ -16,7 +16,7 @@ export class SalesOfferModule extends BaseModule {
   public async list(params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_offers`,
+      url: `/v4/${this.companyId}/sales_offers`,
       params,
     });
   }
@@ -28,7 +28,7 @@ export class SalesOfferModule extends BaseModule {
   public async get(offerId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_offers/${offerId}`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}`,
       params,
     });
   }
@@ -40,7 +40,7 @@ export class SalesOfferModule extends BaseModule {
   public async create(data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'post',
-      url: `/${this.companyId}/sales_offers`,
+      url: `/v4/${this.companyId}/sales_offers`,
       data,
     });
   }
@@ -52,7 +52,7 @@ export class SalesOfferModule extends BaseModule {
   public async update(offerId: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'put',
-      url: `/${this.companyId}/sales_offers/${offerId}`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}`,
       data,
     });
   }
@@ -64,7 +64,7 @@ export class SalesOfferModule extends BaseModule {
   public async delete(offerId: string): Promise<void> {
     await this.authorizedRequest({
       method: 'delete',
-      url: `/${this.companyId}/sales_offers/${offerId}`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}`,
     });
   }
 
@@ -75,7 +75,7 @@ export class SalesOfferModule extends BaseModule {
   public async getPdf(offerId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_offers/${offerId}/pdf`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}/pdf`,
       responseType: 'arraybuffer',
     });
   }
@@ -87,7 +87,7 @@ export class SalesOfferModule extends BaseModule {
   public async archive(offerId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_offers/${offerId}/archive`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}/archive`,
     });
   }
 
@@ -98,7 +98,7 @@ export class SalesOfferModule extends BaseModule {
   public async unarchive(offerId: string): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_offers/${offerId}/unarchive`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}/unarchive`,
     });
   }
 
@@ -109,7 +109,7 @@ export class SalesOfferModule extends BaseModule {
   public async getDetails(offerId: string, params: Record<string, any> = {}): Promise<any> {
     return this.authorizedRequest({
       method: 'get',
-      url: `/${this.companyId}/sales_offers/${offerId}/details`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}/details`,
       params,
     });
   }
@@ -121,7 +121,7 @@ export class SalesOfferModule extends BaseModule {
   public async updateStatus(offerId: string, data: any): Promise<any> {
     return this.authorizedRequest({
       method: 'patch',
-      url: `/${this.companyId}/sales_offers/${offerId}/update_status`,
+      url: `/v4/${this.companyId}/sales_offers/${offerId}/update_status`,
       data,
     });
   }
