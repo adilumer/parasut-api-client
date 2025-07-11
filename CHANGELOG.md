@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2025-07-11
+
+### Fixed
+
+- Updated internal usage of `AxiosInstance` to support Axios v1+.
+
 ## [1.0.1] - 2025-07-10
 
 ### Added
