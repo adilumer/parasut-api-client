@@ -1,4 +1,5 @@
-import axios, * as Axios from 'axios';
+import axios from 'axios';
+type AxiosInstance = ReturnType<typeof axios.create>;
 
 export class BaseModule {
   private static credStore:{
@@ -17,7 +18,7 @@ export class BaseModule {
   private xid: number|string;
   private baseUrl: string;  
   
-  protected axios: Axios.AxiosInstance;
+  protected axios: AxiosInstance;
   protected accessToken: string | null = null;
   protected tokenExpiresAt: number = 0;
   protected companyId: string;
