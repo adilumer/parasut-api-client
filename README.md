@@ -9,12 +9,9 @@ A comprehensive **Node.js/TypeScript** client for **Paraşüt** (API v4) - A clo
 ## 🚀 Features
 
 - ✅ **Full API Coverage** - All endpoints from [Parasut API v4](https://apidocs.parasut.com/#)
-- ✅ **TypeScript Support** - Complete type definitions and IntelliSense
-- ✅ **Modular Design** - Organized by business domains (invoices, contacts, products, etc.)
-- ✅ **OAuth2 Authentication** - Automatic token management and refresh
-- ✅ **Error Handling** - Comprehensive error types and messages
-- ✅ **Modern HTTP Client** - Built with Axios for reliability
-- ✅ **Zero Config** - Works out of the box with sensible defaults
+- ✅ Organized by business domains (invoices, contacts, products, etc.)
+- ✅ Automatic token management and refresh
+- ✅ Built with Axios for reliability
 
 ## 📦 Installation
 
